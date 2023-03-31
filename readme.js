@@ -1,5 +1,4 @@
-# API_Pokemon
-
+/*
 
 ----------------- INPUTS REQUIRED FOR EACH ROUTE ----------------------
 
@@ -63,14 +62,6 @@
 
 
 
-
-
-
-
-
-
-
-
 ----------------- POSTS ENDPOINTS ---------------------
 
                      ----------------------- POKEMONS ------------------------------
@@ -97,14 +88,7 @@
                 {"name": -fill with existing type-}
             ]
         }
-
-
-
-
-
-
-
-
+        
 ----------------- PUTS ENDPOINTS ---------------------
 
                      ----------------------- POKEMONS ------------------------------
@@ -141,13 +125,6 @@
             {"name": -fill with existing type-}
         ]
 
-
-
-
-
-
-
-
 ----------------- DELETS ENDPOINTS ---------------------
 
                      ----------------------- POKEMONS ------------------------------
@@ -176,3 +153,5 @@
 
     It is required to pass by query the ID of the pokemonof the pokemon you wish to remove all its types.
 
+
+*/
