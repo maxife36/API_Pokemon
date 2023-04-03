@@ -2,8 +2,16 @@ const { Sequelize } = require("sequelize");
 const typesFactory = require("./types");
 const pokemonsFactory = require("./pokemons");
 
+//-------Acces Parameters-------
+let user = ""
+let password = ""
+let host =  ""
+let dataBase = ""
+
+
+
 const sequelize = new Sequelize(
-  "postgres://{USER}:{PASSWORD}@{HOST}/{DB}",
+  `postgres://${user}:${password}@${host}/${dataBase}`,
   { logging: false }
 );
 

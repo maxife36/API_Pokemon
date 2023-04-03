@@ -4,7 +4,6 @@ const V = require("../Utils/validations");
 const Msg = require("../Utils/messages");
 
 let findAllPokemons = async () => {
-
   let allPokemons = await pokemon.findAll({
     include: {
       model: type,
@@ -48,9 +47,10 @@ let findFeature = async (feature) => {
 };
 
 let findByType = async (types_filter) => {
-    //Data Validations
-
-    await V.typeValidation(types_filter)
+  //Data Validations
+  console.log("ESTOY EN 1");
+  await V.typeValidation(types_filter);
+  console.log("ESTOY EN 2");
 
   //Execution
 
@@ -58,8 +58,8 @@ let findByType = async (types_filter) => {
     include: {
       model: type,
       where: {
-        [Op.or]: types_filter
-       },
+        [Op.or]: types_filter,
+      },
     },
   });
 
@@ -97,9 +97,24 @@ let creatPokemon = async (data) => {
 
   //Execution
 
-  let newPokemon = await pokemon.create(data, {
-    include: [type],
-  });
+  let newPokemon = await pokemon.create(data);
+
+  //--------------------
+  let poke_types = [];
+
+  let types = data.Types;
+
+  for (let i = 0; i < types.length; i++) {
+    let type_searched = types[i].name;
+
+    let id_searched = await type.findOne({
+      attributes: ["id"],
+      where: { name: type_searched },
+    });
+
+    poke_types.push(id_searched.dataValues.id);
+  }
+  await newPokemon.addTypes(poke_types);
 
   return newPokemon;
 };
@@ -116,10 +131,10 @@ let modifyFeaturesByPk = async (data, id) => {
   //Execution
 
   let poke = await pokemon.update(data, {
-    where: { id: id }
+    where: { id: id },
   });
 
-  return poke;
+  return await findPokemonByPk(id);
 };
 
 let destroyPokemonByPk = async (id) => {
@@ -129,14 +144,14 @@ let destroyPokemonByPk = async (id) => {
 
   //Execution
   let poke_to_destroy = await pokemon.findOne({
-    where: {id:id}
-  })
+    where: { id: id },
+  });
 
   await pokemon.destroy({
     where: { id: id },
   });
-  
-  return poke_to_destroy
+
+  return poke_to_destroy;
 };
 
 module.exports = {

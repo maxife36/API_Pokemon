@@ -16,7 +16,7 @@ server.use("/", routes)
 sequelize.sync({force:true}).then(async()=>{
 
     await fillTypes()
-    await fillPokemons(1,100)
+    await fillPokemons(1,10)
 
     console.log("SE SINCRONIZO CORRECTAMENTE A LA BASE DE DATOS");
     

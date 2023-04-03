@@ -38,14 +38,14 @@ let hpValidation = (hp) => {
 
 let typeValidation = async (Types) => {
 // Types must be an array of objects with the searched properties
-  let typeID = await type.findAll({
+  let searchedTypes = await type.findAll({
     attributes: ["name"],
     where: {
       [Op.or]: Types, 
     },
   });
 
-  if (Types.length !== typeID.length) throw Msg.ErrorInvalidType;
+  if (Types.length !== searchedTypes.length) throw Msg.ErrorInvalidType;
 }
 
 module.exports = {
